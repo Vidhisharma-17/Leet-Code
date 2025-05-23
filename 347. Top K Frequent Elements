@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        std::unordered_map<int, int> freq;
+        for(int ptr: nums){
+            freq[ptr]++;
+        }
+        
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>>minHeap;
+        for(auto& pair: freq){
+            minHeap.push({pair.second, pair.first});
+            if(minHeap.size()> k){
+                minHeap.pop();
+            }
+        }
+        vector<int> result;
+        while(!minHeap.empty()) {
+            result.push_back(minHeap.top().second);
+            minHeap.pop();   
+                 }
+        return result;         
+
+        
+    }
+};
