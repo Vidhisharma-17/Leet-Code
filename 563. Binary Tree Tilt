@@ -1,0 +1,15 @@
+class Solution {
+    int sum=0;
+public:
+    int findTiltHelper(TreeNode* root) {
+        if(!root) return 0;
+        int left=findTiltHelper(root->left);
+        int right=findTiltHelper(root->right);
+        sum+=abs(left-right);
+        return left+right+root->val;
+    }
+    int findTilt(TreeNode* root){
+        findTiltHelper(root);
+        return sum;
+    }
+};
