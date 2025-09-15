@@ -1,0 +1,18 @@
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(!root) return NULL;
+        
+        
+        TreeNode* rh=invertTree(root->right);
+        TreeNode* lh=invertTree(root->left);
+         
+        root->left=lh;
+        root->right=rh;
+        
+        swap(root->left,root->right);
+
+        return root;
+        
+    }
+};
