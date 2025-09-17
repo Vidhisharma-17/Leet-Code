@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> temp;
+        if(!root) return {};
+
+        
+        if(!root->left && !root->right){
+            temp.push_back(to_string(root->val));
+            return temp;
+        }
+
+        vector<string> lh=binaryTreePaths(root->left);
+        vector<string> rh=binaryTreePaths(root->right);
+
+        for(string path:lh){
+            temp.push_back(to_string(root->val)+"->"+ path);
+        }
+        for(string path:rh){
+            temp.push_back(to_string(root->val)+"->"+ path);
+        }
+
+        return temp;
+        
+    }
+};
