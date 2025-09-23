@@ -1,0 +1,31 @@
+class Solution {
+public:
+    TreeNode* addrow(TreeNode* root,int val, int depth, int curr){
+        if(!root)  return nullptr;
+        if(curr==depth-1){
+            TreeNode* prevleft=root->left;
+            TreeNode* prevright=root->right;
+
+            root->left= new TreeNode(val);
+            root->right=new TreeNode(val);
+
+            root->left->left=prevleft;
+            root->right->right=prevright;
+        }
+        root->left=addrow(root->left, val ,depth, curr+1);
+        root->right=addrow(root->right, val, depth, curr+1);
+
+        return root;
+    }
+    TreeNode* addOneRow(TreeNode* root, int val, int depth) {
+        if(depth==1){
+            TreeNode* newroot=new TreeNode(val);
+            newroot->left=root;
+
+            return newroot;
+
+        }
+        int curr=1;
+        return addrow(root,val,depth,curr);  
+    }
+};
