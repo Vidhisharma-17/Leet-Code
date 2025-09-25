@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxDiff(TreeNode* root, int minV, int maxV){
+        if(root==NULL){
+            return abs(minV-maxV);
+        }
+        minV=min(minV,root->val);
+        maxV=max(maxV,root->val);
+
+        int l=maxDiff(root->left,minV,maxV);
+        int r=maxDiff(root->right,minV,maxV);
+
+        return max(l,r);
+    }
+
+    int maxAncestorDiff(TreeNode* root) {
+        return maxDiff(root,root->val,root->val);
+        
+    }
+};
